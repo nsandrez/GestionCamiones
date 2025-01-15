@@ -1,13 +1,9 @@
-import express, { Application } from 'express';
-import dotenv from 'dotenv';
+import express from 'express';
+import usuarioRouter from '../app/routes/usuarioRoutes';
 
-dotenv.config();
+const app = express();
 
-const app: Application = express();
+app.use(express.json()); // Middleware para manejar JSON
+app.use('/api/usuarios', usuarioRouter); // Conecta las rutas de usuarios
 
-app.use((err: any, req: any, res: any, next: any) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Error interno del servidor.' });
-});
-
-export default app;
+export default app; // Exporta la instancia de app como default
