@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import UsuarioService from '../services/usuarioService';
+import usuarioService from '../services/usuarioService';
 
-class UsuarioController {
+class usuarioController {
     // Obtener todos los usuarios
     async obtenerTodosLosUsuarios(req: Request, res: Response): Promise<Response> {
         try {
-            const usuarios = await UsuarioService.obtenerTodosLosUsuarios();
+            const usuarios = await usuarioService.obtenerTodosLosUsuarios();
             return res.status(200).json(usuarios);
         } catch (error) {
             console.error('Error al obtener usuarios:', error);
@@ -17,7 +17,7 @@ class UsuarioController {
     async obtenerUsuarioPorId(req: Request, res: Response): Promise<Response> {
         try {
             const id = parseInt(req.params.id);
-            const usuario = await UsuarioService.obtenerUsuarioPorId(id);
+            const usuario = await usuarioService.obtenerUsuarioPorId(id);
 
             if (!usuario) {
                 return res.status(404).json({ message: 'Usuario no encontrado.' });
@@ -33,7 +33,7 @@ class UsuarioController {
     // Crear un nuevo usuario
     async nuevoUsuario(req: Request, res: Response): Promise<Response> {
         try {
-            const nuevoUsuario = await UsuarioService.nuevoUsuario(req.body);
+            const nuevoUsuario = await usuarioService.nuevoUsuario(req.body);
             return res.status(201).json(nuevoUsuario);
         } catch (error) {
             console.error('Error al crear usuario:', error);
@@ -45,7 +45,7 @@ class UsuarioController {
     async actualizarUsuario(req: Request, res: Response): Promise<Response> {
         try {
             const id = parseInt(req.params.id);
-            const [cantidad, usuariosActualizados] = await UsuarioService.actualizarUsuario(id, req.body);
+            const [cantidad, usuariosActualizados] = await usuarioService.actualizarUsuario(id, req.body);
 
             if (cantidad === 0) {
                 return res.status(404).json({ message: 'Usuario no encontrado.' });
@@ -62,7 +62,7 @@ class UsuarioController {
     async eliminarUsuario(req: Request, res: Response): Promise<Response> {
         try {
             const id = parseInt(req.params.id);
-            const resultado = await UsuarioService.eliminarUsuario(id);
+            const resultado = await usuarioService.eliminarUsuario(id);
 
             if (resultado === 0) {
                 return res.status(404).json({ message: 'Usuario no encontrado.' });
@@ -76,4 +76,4 @@ class UsuarioController {
     }
 }
 
-export default new UsuarioController();
+export default new usuarioController();

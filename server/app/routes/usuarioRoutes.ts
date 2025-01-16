@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import UsuarioController from '../controllers/usuarioController';
+import usuarioController from '../controllers/usuarioController';
 import asyncHandler from '../middleware/asyncHandler'; // Importa el helper
 
 const usuarioRouter = Router();
 
-usuarioRouter.get('/', asyncHandler(UsuarioController.obtenerTodosLosUsuarios));
-usuarioRouter.get('/:id', asyncHandler(UsuarioController.obtenerUsuarioPorId));
-usuarioRouter.post('/create', asyncHandler(UsuarioController.nuevoUsuario));
-usuarioRouter.put('/update/:id', asyncHandler(UsuarioController.actualizarUsuario));
-usuarioRouter.delete('/delete/:id', asyncHandler(UsuarioController.eliminarUsuario));
+usuarioRouter.get('/', asyncHandler(usuarioController.obtenerTodosLosUsuarios));
+usuarioRouter.get('/:id', asyncHandler(usuarioController.obtenerUsuarioPorId));
+usuarioRouter.post('/create', asyncHandler(usuarioController.nuevoUsuario));
+usuarioRouter.put('/update/:id', asyncHandler(usuarioController.actualizarUsuario));
+usuarioRouter.delete('/delete/:id', asyncHandler(usuarioController.eliminarUsuario));
 
 export default usuarioRouter;

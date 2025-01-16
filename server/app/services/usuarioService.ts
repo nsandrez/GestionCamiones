@@ -1,20 +1,20 @@
-import UsuarioModel, { UsuarioAtributosCreacion } from '../models/usuarioModel';
+import usuarioModel, { usuarioAtributosCreacion } from '../models/usuarioModel';
 
-class UsuarioService {
+class usuarioService {
     // Obtener todos los usuarios
-    async obtenerTodosLosUsuarios(): Promise<UsuarioModel[]> {
-        return await UsuarioModel.findAll();
+    async obtenerTodosLosUsuarios(): Promise<usuarioModel[]> {
+        return await usuarioModel.findAll();
     }
 
     // Obtener un usuario por ID
-    async obtenerUsuarioPorId(id: number): Promise<UsuarioModel | null> {
-        return await UsuarioModel.findByPk(id);
+    async obtenerUsuarioPorId(id: number): Promise<usuarioModel | null> {
+        return await usuarioModel.findByPk(id);
     }
 
     // Crear un nuevo usuario
-    async nuevoUsuario(data: UsuarioAtributosCreacion): Promise<UsuarioModel> {
+    async nuevoUsuario(data: usuarioAtributosCreacion): Promise<usuarioModel> {
         try {
-            return await UsuarioModel.create(data);
+            return await usuarioModel.create(data);
         } catch (error) {
             console.error('Error al crear el usuario:', error);
             throw new Error('No se pudo crear el usuario.');
@@ -22,9 +22,9 @@ class UsuarioService {
     }
 
     // Actualizar un usuario
-    async actualizarUsuario(id: number, data: Partial<UsuarioModel>): Promise<[number, UsuarioModel[]]> {
+    async actualizarUsuario(id: number, data: Partial<usuarioModel>): Promise<[number, usuarioModel[]]> {
         try {
-            const resultado = await UsuarioModel.update(data, {
+            const resultado = await usuarioModel.update(data, {
                 where: { id },
                 returning: true, 
             });
@@ -43,7 +43,7 @@ class UsuarioService {
     // Eliminar un usuario
     async eliminarUsuario(id: number): Promise<number> {
         try {
-            const resultado = await UsuarioModel.destroy({ where: { id } });
+            const resultado = await usuarioModel.destroy({ where: { id } });
             if (resultado === 0) {
                 throw new Error('Usuario no encontrado.');
             }
@@ -55,4 +55,4 @@ class UsuarioService {
     }
 }
 
-export default new UsuarioService();
+export default new usuarioService();

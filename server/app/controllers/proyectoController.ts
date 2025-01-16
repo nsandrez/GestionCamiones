@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import ProyectoService from '../services/proyectoService';
+import proyectoService from '../services/proyectoService';
 
-class ProyectoController {
+class proyectoController {
     // Obtener todos los proyectos
     async obtenerTodosLosProyectos(req: Request, res: Response): Promise<Response> {
         try {
-            const proyectos = await ProyectoService.obtenerTodosLosProyectos();
+            const proyectos = await proyectoService.obtenerTodosLosProyectos();
             return res.status(200).json(proyectos);
         } catch (error) {
             console.error('Error al obtener proyectos:', error);
@@ -17,7 +17,7 @@ class ProyectoController {
     async obtenerProyectoPorId(req: Request, res: Response): Promise<Response> {
         try {
             const id = parseInt(req.params.id);
-            const proyecto = await ProyectoService.obtenerProyectoPorId(id);
+            const proyecto = await proyectoService.obtenerProyectoPorId(id);
 
             if (!proyecto) {
                 return res.status(404).json({ message: 'Proyecto no encontrado.' });
@@ -33,7 +33,7 @@ class ProyectoController {
     // Crear un nuevo proyecto
     async nuevoProyecto(req: Request, res: Response): Promise<Response> {
         try {
-            const nuevoProyecto = await ProyectoService.nuevoProyecto(req.body);
+            const nuevoProyecto = await proyectoService.nuevoProyecto(req.body);
             return res.status(201).json(nuevoProyecto);
         } catch (error) {
             console.error('Error al crear proyecto:', error);
@@ -45,7 +45,7 @@ class ProyectoController {
     async actualizarProyecto(req: Request, res: Response): Promise<Response> {
         try {
             const id = parseInt(req.params.id);
-            const [cantidad, proyectosActualizados] = await ProyectoService.actualizarProyecto(id, req.body);
+            const [cantidad, proyectosActualizados] = await proyectoService.actualizarProyecto(id, req.body);
 
             if (cantidad === 0) {
                 return res.status(404).json({ message: 'Proyecto no encontrado.' });
@@ -62,7 +62,7 @@ class ProyectoController {
     async eliminarProyecto(req: Request, res: Response): Promise<Response> {
         try {
             const id = parseInt(req.params.id);
-            const resultado = await ProyectoService.eliminarProyecto(id);
+            const resultado = await proyectoService.eliminarProyecto(id);
 
             if (resultado === 0) {
                 return res.status(404).json({ message: 'Proyecto no encontrado.' });
@@ -76,4 +76,4 @@ class ProyectoController {
     }
 }
 
-export default new ProyectoController();
+export default new proyectoController();

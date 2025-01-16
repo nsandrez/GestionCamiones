@@ -2,7 +2,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import bcrypt from 'bcrypt'; // Importa bcrypt
 import conexion from '../../config/conexion';
 
-interface UsuarioAtributos {
+interface usuarioAtributos {
     id: number;
     nombreCompleto: string;
     correo: string;
@@ -13,9 +13,9 @@ interface UsuarioAtributos {
     ultimaActualizacion: Date;
 }
 
-type UsuarioAtributosCreacion = Optional<UsuarioAtributos, 'id'>;
+type usuarioAtributosCreacion = Optional<usuarioAtributos, 'id'>;
 
-class UsuarioModel extends Model<UsuarioAtributos, UsuarioAtributosCreacion> implements UsuarioAtributos {
+class usuarioModel extends Model<usuarioAtributos, usuarioAtributosCreacion> implements usuarioAtributos {
     public id!: number;
     public nombreCompleto!: string;
     public correo!: string;
@@ -27,7 +27,7 @@ class UsuarioModel extends Model<UsuarioAtributos, UsuarioAtributosCreacion> imp
     public readonly ultimaActualizacion!: Date;
 }
 
-UsuarioModel.init(
+usuarioModel.init(
     {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
@@ -77,14 +77,14 @@ UsuarioModel.init(
         updatedAt: 'ultimaActualizacion',
         hooks: {
             // Hook para encriptar la clave antes de guardar
-            beforeCreate: async (usuario: UsuarioModel) => {
+            beforeCreate: async (usuario: usuarioModel) => {
                 if (usuario.clave) {
                     const salt = await bcrypt.genSalt(10);
                     usuario.clave = await bcrypt.hash(usuario.clave, salt);
                 }
             },
             // Opcional: Hook para actualizar la clave si cambia
-            beforeUpdate: async (usuario: UsuarioModel) => {
+            beforeUpdate: async (usuario: usuarioModel) => {
                 if (usuario.changed('clave')) {
                     const salt = await bcrypt.genSalt(10);
                     usuario.clave = await bcrypt.hash(usuario.clave, salt);
@@ -94,5 +94,5 @@ UsuarioModel.init(
     }
 );
 
-export { UsuarioAtributosCreacion }; 
-export default UsuarioModel;
+export { usuarioAtributosCreacion }; 
+export default usuarioModel;

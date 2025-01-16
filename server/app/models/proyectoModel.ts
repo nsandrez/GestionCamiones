@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import conexion from '../../config/conexion';
 
-interface ProyectoAtributos {
+interface proyectoAtributos {
     id: number;
     nombre: string;
     descripcion: string;
@@ -10,9 +10,9 @@ interface ProyectoAtributos {
     ultimaActualizacion: Date;
 }
 
-type ProyectoAtributosCreacion = Optional<ProyectoAtributos, 'id'>;
+type proyectoAtributosCreacion = Optional<proyectoAtributos, 'id'>;
 
-class ProyectoModel extends Model<ProyectoAtributos, ProyectoAtributosCreacion> implements ProyectoAtributos {
+class proyectoModel extends Model<proyectoAtributos, proyectoAtributosCreacion> implements proyectoAtributos {
     public id!: number;
     public nombre!: string;
     public descripcion!: string;
@@ -22,7 +22,7 @@ class ProyectoModel extends Model<ProyectoAtributos, ProyectoAtributosCreacion> 
     public readonly ultimaActualizacion!: Date;
 }
 
-ProyectoModel.init(
+proyectoModel.init(
     {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
@@ -64,5 +64,5 @@ ProyectoModel.init(
     }
 );
 
-export { ProyectoAtributosCreacion }; 
-export default ProyectoModel;
+export { proyectoAtributosCreacion }; 
+export default proyectoModel;

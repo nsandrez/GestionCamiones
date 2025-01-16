@@ -1,20 +1,20 @@
-import ProyectoModel, { ProyectoAtributosCreacion } from '../models/proyectoModel';
+import proyectoModel, { proyectoAtributosCreacion } from '../models/proyectoModel';
 
-class ProyectoService {
+class proyectoService {
     // Obtener todos los proyectos
-    async obtenerTodosLosProyectos(): Promise<ProyectoModel[]> {
-        return await ProyectoModel.findAll();
+    async obtenerTodosLosProyectos(): Promise<proyectoModel[]> {
+        return await proyectoModel.findAll();
     }
 
     // Obtener un proyecto por ID
-    async obtenerProyectoPorId(id: number): Promise<ProyectoModel | null> {
-        return await ProyectoModel.findByPk(id);
+    async obtenerProyectoPorId(id: number): Promise<proyectoModel | null> {
+        return await proyectoModel.findByPk(id);
     }
 
     // Crear un nuevo proyecto
-    async nuevoProyecto(data: ProyectoAtributosCreacion): Promise<ProyectoModel> {
+    async nuevoProyecto(data: proyectoAtributosCreacion): Promise<proyectoModel> {
         try {
-            return await ProyectoModel.create(data);
+            return await proyectoModel.create(data);
         } catch (error) {
             console.error('Error al crear el proyecto:', error);
             throw new Error('No se pudo crear el proyecto.');
@@ -22,9 +22,9 @@ class ProyectoService {
     }
 
     // Actualizar un proyecto
-    async actualizarProyecto(id: number, data: Partial<ProyectoModel>): Promise<[number, ProyectoModel[]]> {
+    async actualizarProyecto(id: number, data: Partial<proyectoModel>): Promise<[number, proyectoModel[]]> {
         try {
-            const resultado = await ProyectoModel.update(data, {
+            const resultado = await proyectoModel.update(data, {
                 where: { id },
                 returning: true, 
             });
@@ -43,7 +43,7 @@ class ProyectoService {
     // Eliminar un proyecto
     async eliminarProyecto(id: number): Promise<number> {
         try {
-            const resultado = await ProyectoModel.destroy({ where: { id } });
+            const resultado = await proyectoModel.destroy({ where: { id } });
             if (resultado === 0) {
                 throw new Error('Proyecto no encontrado.');
             }
@@ -55,4 +55,4 @@ class ProyectoService {
     }
 }
 
-export default new ProyectoService();
+export default new proyectoService();
