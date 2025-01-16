@@ -1,4 +1,5 @@
 import { DataTypes, Model, Optional } from 'sequelize';
+import bcrypt from 'bcrypt'; // Importa bcrypt
 import conexion from '../../config/conexion';
 
 interface UsuarioAtributos {
@@ -74,6 +75,22 @@ UsuarioModel.init(
         timestamps: true,
         createdAt: 'fechaCreacion',
         updatedAt: 'ultimaActualizacion',
+        hooks: {
+            // Hook para encriptar la clave antes de guardar
+            beforeCreate: async (usuario: UsuarioModel) => {
+                if (usuario.clave) {
+                    const salt = await bcrypt.genSalt(10);
+                    usuario.clave = await bcrypt.hash(usuario.clave, salt);
+                }
+            },
+            // Opcional: Hook para actualizar la clave si cambia
+            beforeUpdate: async (usuario: UsuarioModel) => {
+                if (usuario.changed('clave')) {
+                    const salt = await bcrypt.genSalt(10);
+                    usuario.clave = await bcrypt.hash(usuario.clave, salt);
+                }
+            },
+        },
     }
 );
 
