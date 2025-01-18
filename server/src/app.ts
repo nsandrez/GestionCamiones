@@ -5,6 +5,7 @@ import proyectoUsuarioRouter from '../app/routes/proyectoUsuarioRoutes';
 import camionRouter from '../app/routes/camionRoutes';
 import conductorRouter from '../app/routes/conductorRoutes';
 import proyectoCamionRouter from '../app/routes/proyectoCamionRoutes';
+import proyectoConductorRouter from '../app/routes/proyectoConductorRoutes';
 
 
 
@@ -18,6 +19,8 @@ app.use('/api/proyectos-usuarios', proyectoUsuarioRouter); // Conecta las rutas 
 app.use('/api/camiones', camionRouter); // Conecta las rutas de camion
 app.use('/api/conductores', conductorRouter); // Conecta las rutas de conductor
 app.use('/api/proyecto-camiones', proyectoCamionRouter); // Conecta las rutas de camion-proyecto
+app.use('/api/proyecto-conductores', proyectoConductorRouter); // Conecta las rutas de conductor-proyecto
+
 
 
 export default app; // Exporta la instancia de app como default
