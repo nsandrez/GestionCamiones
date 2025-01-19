@@ -7,6 +7,7 @@ import conductorRouter from '../app/routes/conductorRoutes';
 import proyectoCamionRouter from '../app/routes/proyectoCamionRoutes';
 import proyectoConductorRouter from '../app/routes/proyectoConductorRoutes';
 import camionConductorRouter from '../app/routes/camionConductorRoutes';
+import documentoRouter from '../app/routes/documentoRoutes';
 
 
 const app = express();
@@ -20,5 +21,7 @@ app.use('/api/conductores', conductorRouter); // Conecta las rutas de conductor
 app.use('/api/proyecto-camiones', proyectoCamionRouter); // Conecta las rutas de camion-proyecto
 app.use('/api/proyecto-conductores', proyectoConductorRouter); // Conecta las rutas de conductor-proyecto
 app.use('/api/camiones-conductores', camionConductorRouter); // Conecta las rutas de conductor-camion
+app.use('/api/documentos', documentoRouter); // Conecta las rutas de documento
+
 
 export default app; // Exporta la instancia de app como default
